@@ -4,9 +4,8 @@ import java.util.Set;
 
 import com.chess.Color;
 import com.chess.Coordinates;
-import com.chess.CoordinatesShift;
 
-public class Queen extends Piece{
+public class Queen extends LongRangePiece implements IBishop, IRook{
 
     public Queen(Color color, Coordinates coordinates) {
         super(color, coordinates);
@@ -15,8 +14,10 @@ public class Queen extends Piece{
 
     @Override
     protected Set<CoordinatesShift> getPieceMoves() {
-        // TODO Auto-generated method stub
-        return null;
+        Set<CoordinatesShift> moves = getBishopMoves();
+        moves.addAll(getRooksMoves());
+
+        return moves;
     }
 
 }

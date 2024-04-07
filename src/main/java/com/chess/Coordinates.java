@@ -1,5 +1,6 @@
 package com.chess;
 
+import com.chess.piece.CoordinatesShift;
 
 public class Coordinates {
     public final File file;
@@ -54,6 +55,15 @@ public class Coordinates {
             return false;
         return true;
     }
+
+    @Override
+    public String toString() {
+        return file + String.valueOf(rank);
+    }
+
+
+    
+
     
     
 }

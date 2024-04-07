@@ -1,12 +1,16 @@
 package com.chess.piece;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import com.chess.Board;
+import com.chess.BoardUtils;
 import com.chess.Color;
 import com.chess.Coordinates;
-import com.chess.CoordinatesShift;
 
-public class Bishop extends Piece{
+
+public class Bishop extends LongRangePiece implements IBishop{
 
     public Bishop(Color color, Coordinates coordinates) {
         super(color, coordinates);
@@ -15,8 +19,11 @@ public class Bishop extends Piece{
 
     @Override
     protected Set<CoordinatesShift> getPieceMoves() {
-        // TODO Auto-generated method stub
-        return null;
+        return getBishopMoves();
     }
+
+
+
+    
 
 }

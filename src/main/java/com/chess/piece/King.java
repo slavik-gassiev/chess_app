@@ -4,7 +4,6 @@ import java.util.Set;
 
 import com.chess.Color;
 import com.chess.Coordinates;
-import com.chess.CoordinatesShift;
 
 public class King extends Piece{
 

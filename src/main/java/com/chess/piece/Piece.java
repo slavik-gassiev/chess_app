@@ -6,7 +6,6 @@ import java.util.Set;
 import com.chess.Board;
 import com.chess.Color;
 import com.chess.Coordinates;
-import com.chess.CoordinatesShift;
 
 abstract public class Piece {
     
@@ -36,7 +35,7 @@ abstract public class Piece {
         return result;
     }
     
-    private boolean isSquareAvailableForMove(Coordinates coordinates, Board board) {
+    protected boolean isSquareAvailableForMove(Coordinates coordinates, Board board) {
         return board.isSquareEmpty(coordinates) || board.getPiece(coordinates).color != color;
     }
 

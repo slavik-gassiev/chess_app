@@ -1,4 +1,4 @@
-package com.chess;
+package com.chess.piece;
 
 public class CoordinatesShift {
     public final int fileShift;
