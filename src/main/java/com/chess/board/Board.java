@@ -1,7 +1,13 @@
-package com.chess;
+package com.chess.board;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
+import com.chess.Color;
+import com.chess.Coordinates;
+import com.chess.File;
 import com.chess.piece.Bishop;
 import com.chess.piece.King;
 import com.chess.piece.Knight;
@@ -11,7 +17,15 @@ import com.chess.piece.Queen;
 import com.chess.piece.Rook;
 
 public class Board {
-    HashMap<Coordinates, Piece> pieces = new HashMap<Coordinates, Piece>();
+
+    public final String startingFen;
+    public HashMap<Coordinates, Piece> pieces = new HashMap<Coordinates, Piece>();
+    public List<Move> moves = new ArrayList<>();
+
+    public Board(String startingFen) {
+        this.startingFen = startingFen;
+    }
+
 
     public void setPiece(Coordinates coordinates, Piece piece) {
         piece.coordinates = coordinates;
@@ -28,11 +42,13 @@ public class Board {
         pieces.remove(coordinates);
     }
 
-    public void movePiece(Coordinates from, Coordinates to) {
-        Piece piece = getPiece(from);
+    public void makeMove(Move move) {
+        Piece piece = getPiece(move.from);
 
-        removePiece(from);
-        setPiece(to, piece);
+        removePiece(move.from);
+        setPiece(move.to, piece);
+
+        moves.add(move);
 
     }
     
@@ -79,4 +95,32 @@ public class Board {
 
     }
 
+    
+    public List<Piece> getPiecesByColor(Color color) {
+        List<Piece> result = new ArrayList<>();
+
+        for (Piece piece : pieces.values()) {
+            if(piece.color == color) {
+                result.add(piece);
+            }
+        }
+
+       return result;
+    }
+    
+    public boolean isSquareAttackedByColor(Coordinates coordinates, Color color) {
+        List<Piece> pieces = getPiecesByColor(color);
+        
+        for (Piece piece : pieces) {
+            Set<Coordinates> attackedSquares = piece.getAttackedSquares(this);
+
+            if(attackedSquares.contains(coordinates)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    
 }

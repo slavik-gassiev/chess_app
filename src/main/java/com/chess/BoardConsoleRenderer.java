@@ -2,6 +2,8 @@ package com.chess;
 
 import java.util.Set;
 import static java.util.Collections.emptySet;
+
+import com.chess.board.Board;
 import com.chess.piece.Piece;
 
 public class BoardConsoleRenderer {
@@ -23,9 +25,11 @@ public class BoardConsoleRenderer {
 
         Set<Coordinates> availableMoveSquare = emptySet();
         if(pieceToMove != null){
+           
             availableMoveSquare =  pieceToMove.getAvailableMoveSquares(board);
+            
         }
-       
+        
 
         for(int rank = 8; rank >= 1; rank--) {
             String line = "";

@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.chess.Board;
-import com.chess.BoardUtils;
 import com.chess.Color;
 import com.chess.Coordinates;
+import com.chess.board.Board;
+import com.chess.board.BoardUtils;
 
 public class Rook extends LongRangePiece implements IRook{
 

@@ -3,6 +3,10 @@ package com.chess;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.chess.board.Board;
+import com.chess.board.BoardFactory;
+import com.chess.board.Move;
+import com.chess.piece.King;
 import com.chess.piece.Piece;
 
 public class InputCoordinates {
@@ -90,5 +94,37 @@ public class InputCoordinates {
 
             return input;
         }
+    }
+
+    public static Move inputMove(Board board, Color color, BoardConsoleRenderer renderer) {
+        
+            while(true) {
+            Coordinates sourceCoordinates = InputCoordinates.inputpPieceCoordinatesForColor(color, board);
+
+            Piece piece = board.getPiece(sourceCoordinates);
+            Set<Coordinates>  availableMoveSquare = piece.getAvailableMoveSquares(board);
+
+
+            renderer.render(board, piece);
+            Coordinates targetCoordinates = InputCoordinates.inputAvailableSquare(availableMoveSquare);
+
+            Move move = new Move(sourceCoordinates, targetCoordinates);
+
+            if(validateIfKingInCheckAfterMove(board, color, move)) {
+                System.out.println("Your king is under attack!");
+                continue;
+
+            }
+
+            return move;
+        }
+            
+    }
+
+    private static boolean validateIfKingInCheckAfterMove(Board board, Color color, Move move) {
+        Board copy = new BoardFactory().copy(board);
+        copy.makeMove(move);
+        Piece king = copy.getPiecesByColor(color).stream().filter(piece -> piece instanceof King).findFirst().get();
+        return copy.isSquareAttackedByColor(king.coordinates, color.opposite());
     }
 }

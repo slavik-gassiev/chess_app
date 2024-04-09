@@ -3,5 +3,9 @@ package com.chess;
 
 public enum Color {
     WHITE,
-    BLACK
+    BLACK;
+
+    public Color opposite() {
+        return this.WHITE == WHITE ? BLACK : WHITE;
+    }
 }
